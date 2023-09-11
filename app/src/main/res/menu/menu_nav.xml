@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Mon profile"
+        android:id="@+id/action_mon_profil"/>
+
+    <item android:title="Déconnexion"
+        android:id="@+id/action_deconnexion"/>
+
+
+    <item
+        android:title="PARAMETRES">
+        <menu>
+            <item
+                android:id="@+id/action_etudiant"
+                android:title="Liste des éudiants"/>
+
+            <item android:title="Publier une infos"
+                android:id="@+id/action_publier_infos"/>
+            <item
+                android:title="Publier l'horaire"
+                android:id="@+id/action_publier_horaire"/>
+
+            <item android:title="Liste utilisateurs"
+                android:id="@+id/action_liste_utilisateur"/>
+        </menu>
+    </item>
+    <item android:title=""/>
+    <item android:title=""/>
+</menu>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ValveOnline"
+        tools:targetApi="31">
+        <activity
+            android:name=".Utilisateur.NouvelUtilisateurActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Utilisateur.ListeUtilisateurActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Infos.PublierInfosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Infos.ListeInfosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Horaire.PublierHoraireActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cours.NouveauCoursActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cours.ListeCoursActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Promotion.NouvellePromotionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Promotion.ListePromotionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Faculte.NouvelleFaculteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Faculte.ListeFaculteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Etudiant.NouveauEtudiantActivity"
+            android:exported="false"
+            android:parentActivityName=".Etudiant.ListeEtudiant" />
+        <activity
+            android:name=".Etudiant.ListeEtudiant"
+            android:exported="false"
+            android:parentActivityName=".Home.HomeActivity" />
+        <activity
+            android:name=".Horaire.ListeCoursDuJour"
+            android:exported="false"
+            android:parentActivityName=".Horaire.JourSemaine" />
+        <activity
+            android:name=".Horaire.JourSemaine"
+            android:exported="false"
+            android:parentActivityName=".Home.HomeActivity" />
+        <activity
+            android:name=".Home.PublicEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.GetStatedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
