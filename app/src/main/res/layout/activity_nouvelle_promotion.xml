@@ -32,16 +32,18 @@
 
     </LinearLayout>
     <ProgressBar
-        android:id="@+id/progress_load_cours"
+        android:id="@+id/progress_load_promotion"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/linear_entete"
         android:layout_marginTop="10dp"/>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/promotion_recycle_promotion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/progress_load_cours"/>
+        android:layout_below="@id/progress_load_promotion"/>
     <Button
+        android:id="@+id/promotion_add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="nouvelle promotion"

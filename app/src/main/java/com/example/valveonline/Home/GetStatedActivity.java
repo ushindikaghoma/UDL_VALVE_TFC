@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.valveonline.Infos.ListeInfosActivity;
+import com.example.valveonline.Login.LoginActivity;
 import com.example.valveonline.R;
 
 public class GetStatedActivity extends AppCompatActivity {
@@ -25,14 +27,14 @@ public class GetStatedActivity extends AppCompatActivity {
         cardViewEtudiant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
 
         cardViewVisitweur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getApplicationContext(), ListeInfosActivity.class));
             }
         });
     }

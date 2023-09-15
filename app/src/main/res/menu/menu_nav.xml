@@ -9,7 +9,8 @@
 
 
     <item
-        android:title="PARAMETRES">
+        android:title="CONFIGURATIONS"
+        android:id="@+id/main_item_configuration">
         <menu>
             <item
                 android:id="@+id/action_etudiant"
@@ -23,6 +24,12 @@
 
             <item android:title="Liste utilisateurs"
                 android:id="@+id/action_liste_utilisateur"/>
+            <item android:title="Liste cours"
+                android:id="@+id/action_liste_cours"/>
+            <item android:title="Liste facultés"
+                android:id="@+id/action_liste_faculte"/>
+            <item android:title="Liste promotions"
+                android:id="@+id/action_liste_promotion"/>
         </menu>
     </item>
     <item android:title=""/>
