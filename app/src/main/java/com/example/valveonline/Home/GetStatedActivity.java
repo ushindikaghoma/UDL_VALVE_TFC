@@ -34,7 +34,8 @@ public class GetStatedActivity extends AppCompatActivity {
         cardViewVisitweur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ListeInfosActivity.class));
+                startActivity(new Intent(getApplicationContext(), ListeInfosActivity.class)
+                        .putExtra("visitor_mode",true));
             }
         });
     }

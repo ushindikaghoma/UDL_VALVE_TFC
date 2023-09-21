@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Horaire.ListeHoraireTousActivity"
+    android:background="@color/white_milk"
+    android:orientation="vertical">
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/Widget.LetGo.TextInputLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Code Faculté"-->
+<!--                android:textSize="20sp"/>-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/horaire_spinner_faculte"-->
+<!--                android:layout_width="170dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="right"/>-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/Widget.LetGo.TextInputLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Code promotion"-->
+<!--                android:textSize="20sp"/>-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/horaire_spinner_promotion"-->
+<!--                android:layout_width="170dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="right"/>-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+<!--    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/progress_horaire_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/horaire_liste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress_horaire_dujour_"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"/>-->
+
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.example.valveonline.Utilisateur.data;
 import com.example.valveonline.DataBaseConnector.Reponse;
 import com.example.valveonline.Faculte.data.FaculteReponse;
 import com.example.valveonline.Horaire.data.HoraireResponse;
+import com.example.valveonline.Infos.data.InfosResponse;
 
 import java.util.List;
 
@@ -17,4 +18,10 @@ public interface UtilisateurConnexion {
     Call<List<UtilisateurResponse>> getListeUtilisateur();
     @POST("api/Utilisateur/SaveUtilisateur")
     Call<Reponse> SaveUtilisateur(@Body UtilisateurResponse utilisateurResponse);
+
+    @POST("api/Utilisateur/UpdateUtilisateur")
+    Call<Reponse> UpdateUtilisateur(@Body UtilisateurResponse utilisateurResponse);
+
+    @POST("api/Utilisateur/SupprimerUtilisateur")
+    Call<Reponse> SupprimerUtilisateur(@Body UtilisateurResponse utilisateurResponse);
 }

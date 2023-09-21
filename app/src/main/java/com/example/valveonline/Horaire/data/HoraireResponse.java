@@ -2,7 +2,9 @@ package com.example.valveonline.Horaire.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class HoraireResponse {
+import java.io.Serializable;
+
+public class HoraireResponse implements Serializable {
     @SerializedName("idHoraire")
     private int IdHoraire;
     @SerializedName("codeCours")
@@ -19,6 +21,12 @@ public class HoraireResponse {
     private String DesignationCours;
     @SerializedName("volumeCours")
     private String VolumeCours ;
+    @SerializedName("heureDebut")
+    private String HeureDebut;
+    @SerializedName("heureFin")
+    private String HeureFin;
+    @SerializedName("etatHoraire")
+    public int etatHoraire;
 
     public HoraireResponse(int idHoraire, String codeCours,
                            String dateHoraire, String jourHoraire,
@@ -35,14 +43,46 @@ public class HoraireResponse {
     }
 
     public HoraireResponse(String codeFaculte, String codePromotion,
-                           String designationCours, String codeCours) {
+                           String designationCours, String codeCours,
+                           String heureDebut, String heureFin,
+                           String dateHoraire, String jourHoraire,
+                           int idHoraire) {
         CodeFaculte = codeFaculte;
         CodePromotion = codePromotion;
         DesignationCours = designationCours;
         CodeCours = codeCours;
+        HeureDebut = heureDebut;
+        HeureFin = heureFin;
+        DateHoraire = dateHoraire;
+        JourHoraire = jourHoraire;
+        IdHoraire = idHoraire;
     }
 
     public HoraireResponse() {
+    }
+
+    public String getHeureDebut() {
+        return HeureDebut;
+    }
+
+    public int getEtatHoraire() {
+        return etatHoraire;
+    }
+
+    public void setEtatHoraire(int etatHoraire) {
+        this.etatHoraire = etatHoraire;
+    }
+
+    public void setHeureDebut(String heureDebut) {
+        this.HeureDebut = heureDebut;
+    }
+
+    public String getHeureFin() {
+        return HeureFin;
+    }
+
+    public void setHeureFin(String heureFin) {
+        this.HeureFin = heureFin;
     }
 
     public int getIdHoraire() {

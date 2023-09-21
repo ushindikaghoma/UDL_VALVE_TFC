@@ -37,11 +37,14 @@ public class UtilisateurResponse {
     }
 
     public UtilisateurResponse(String nomUtilisateur, String niveauUtilisateur,
-                               String codeFaculte, String codePromotion) {
+                               String codeFaculte, String codePromotion,
+                               int idUtilisateur, String motPasseUtilisateur) {
         NomUtilisateur = nomUtilisateur;
         NiveauUtilisateur = niveauUtilisateur;
         CodeFaculte = codeFaculte;
         CodePromotion = codePromotion;
+        IdUtilisateur = idUtilisateur;
+        MotPasseUtilisateur = motPasseUtilisateur;
     }
 
     public UtilisateurResponse() {

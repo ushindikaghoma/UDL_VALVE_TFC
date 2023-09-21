@@ -2,7 +2,9 @@ package com.example.valveonline.Infos.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class InfosResponse {
+import java.io.Serializable;
+
+public class InfosResponse  implements Serializable {
     @SerializedName("idInfos")
     private int IdInfos;
     @SerializedName("titreInfos")
@@ -15,10 +17,12 @@ public class InfosResponse {
     private String  DesciptionInfos;
 
 
-    public InfosResponse(String titreInfos, String dateInfos, String desciptionInfos) {
+    public InfosResponse(String titreInfos, String dateInfos, String desciptionInfos,
+                         int idInfos) {
         TitreInfos = titreInfos;
         DateInfos = dateInfos;
         DesciptionInfos = desciptionInfos;
+        IdInfos = idInfos;
     }
 
     public InfosResponse() {

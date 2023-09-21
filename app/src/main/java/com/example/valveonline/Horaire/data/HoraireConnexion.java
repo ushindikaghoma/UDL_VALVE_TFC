@@ -18,6 +18,15 @@ public interface HoraireConnexion {
     Call<List<HoraireResponse>> getHoraireParPromotion(@Query("codeFaculte") String codeFaculte,
                                         @Query("codePromotion") String codePromotion,
                                         @Query("jour") String jourHoraire);
+    @GET("api/Horaire/HoraireParFaculteParPromotionTous")
+    Call<List<HoraireResponse>> getHoraireTous();
     @POST("api/Horaire/SaveHoraire")
     Call<Reponse> SaveHoraire(@Body HoraireResponse horaireResponse);
+    @POST("api/Horaire/UpdateHoraire")
+    Call<Reponse> UpdadeHoraire(@Body HoraireResponse horaireResponse);
+
+    @POST("api/Horaire/UpdateEtatHoraire")
+    Call<Reponse> UpdadeEtatHoraire(@Body HoraireResponse horaireResponse);
+    @POST("api/Horaire/SupprimerHoraire")
+    Call<Reponse> SupprimerHoraire(@Body HoraireResponse horaireResponse);
 }

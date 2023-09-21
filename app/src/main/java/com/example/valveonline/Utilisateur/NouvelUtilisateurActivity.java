@@ -175,7 +175,9 @@ public class NouvelUtilisateurActivity extends AppCompatActivity {
                                         response.body().get(a).getNomUtilisateur(),
                                         response.body().get(a).getNiveauUtilisateur(),
                                         response.body().get(a).getCodeFaculte(),
-                                        response.body().get(a).getCodePromotion()
+                                        response.body().get(a).getCodePromotion(),
+                                        response.body().get(a).getIdUtilisateur(),
+                                        response.body().get(a).getMotPasseUtilisateur()
 
                                 );
 

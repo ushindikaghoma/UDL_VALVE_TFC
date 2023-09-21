@@ -29,16 +29,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="100dp"
-                        android:layout_height="80dp"/>
+                        android:layout_height="90dp"
+                        android:src="@drawable/cours_"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_weight="0.6">
 
                         <TextView
                             android:id="@+id/modelHoraireNomCours"
@@ -46,7 +49,8 @@
                             android:layout_height="wrap_content"
                             android:text="POO"
                             android:textStyle="bold"
-                            android:textSize="26sp"
+                            android:textSize="24sp"
+                            android:layout_weight="1"
                             />
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -59,9 +63,8 @@
                                 android:id="@+id/modelHoraireDateDebut"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="De 8h00"
-                                android:textStyle="bold"
+                                android:layout_weight="2"
+                                android:text=""
                                 android:textSize="19sp"
                                 />
                             <TextView
@@ -76,6 +79,13 @@
                         </LinearLayout>
 
                     </LinearLayout>
+                    <TextView
+                        android:id="@+id/modelHoraireItemOptionMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="&#8942;"
+                        android:textAppearance="?android:textAppearanceLarge"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

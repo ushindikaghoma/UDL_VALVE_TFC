@@ -100,7 +100,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(), ListeInfosActivity.class));
+                startActivity(new Intent(getApplicationContext(), ListeInfosActivity.class)
+                        .putExtra("visitor_mode",false));
             }
         });
 
@@ -121,13 +122,15 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), NouvellePromotionActivity.class));
                 }else if (id == R.id.action_publier_horaire)
                 {
-                    startActivity(new Intent(getApplicationContext(), PublierHoraireActivity.class));
+                    startActivity(new Intent(getApplicationContext(), PublierHoraireActivity.class)
+                            .putExtra("type",""));
                 }else if (id == R.id.action_liste_utilisateur)
                 {
                     startActivity(new Intent(getApplicationContext(), NouvelUtilisateurActivity.class));
                 }else if (id == R.id.action_publier_infos)
                 {
-                    startActivity(new Intent(getApplicationContext(), PublierInfosActivity.class));
+                    startActivity(new Intent(getApplicationContext(), PublierInfosActivity.class)
+                            .putExtra("type",""));
                 }
 
                 return false;

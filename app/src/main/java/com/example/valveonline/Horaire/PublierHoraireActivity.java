@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,6 +51,9 @@ public class PublierHoraireActivity extends AppCompatActivity {
 
     Calendar calendar;
     String date_debut, date_fin, todayDate;
+    String type;
+    HoraireResponse myObject;
+    Button view_liste_horaire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +70,51 @@ public class PublierHoraireActivity extends AppCompatActivity {
         heure_debut = findViewById(R.id.horaire_heure_debut);
         heure_fin = findViewById(R.id.horaire_heure_fin);
         save_horaire_btn = findViewById(R.id.horaire_confirmer_btn);
+        view_liste_horaire = findViewById(R.id.horaire_liste_horaire_btn);
         progressBar = findViewById(R.id.horaire_progress);
 
         faculteRepository = FaculteRepository.getInstance();
         promotionRepository = PromotionRepository.getInstance();
 
+        type = getIntent().getStringExtra("type");
+        myObject = (HoraireResponse) getIntent().getSerializableExtra("myObject");
+
         calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         todayDate = format.format(calendar.getTime());
 
-        date_horaire.setText(todayDate);
+        Toast.makeText(PublierHoraireActivity.this, ""+type, Toast.LENGTH_SHORT).show();
 
-        new AsyncLoadSpinner(progressBar, code_faculte, code_promotion).execute();
+        if (type != "")
+        {
+            if (type.equals("modifier"))
+            {
+                date_horaire.setText(myObject.getDateHoraire());
+                new AsyncLoadSpinner(progressBar, code_faculte, code_promotion).execute();
+                nom_cours.setText(myObject.getCodeCours());
+                jour_horaire.setText(myObject.getJourHoraire());
+                heure_debut.setText(myObject.getHeureDebut());
+                heure_fin.setText(myObject.getHeureFin());
+
+            }else
+            {
+                date_horaire.setText(todayDate);
+
+                new AsyncLoadSpinner(progressBar, code_faculte, code_promotion).execute();
+            }
+        }else {
+            date_horaire.setText(todayDate);
+
+            new AsyncLoadSpinner(progressBar, code_faculte, code_promotion).execute();
+        }
+
+        view_liste_horaire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),ListeHoraireTousActivity.class));
+            }
+        });
+
 
         date_horaire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,10 +152,19 @@ public class PublierHoraireActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new AsyncSaveHoraire(code_faculte.getSelectedItem().toString(),
-                        code_promotion.getSelectedItem().toString(),
-                        date_horaire, jour_horaire, nom_cours, heure_debut,
-                        heure_fin,progressBar).execute();
+                if (type.equals("modifier"))
+                {
+                    new AsyncUpdateHoraire(code_faculte.getSelectedItem().toString(),
+                            code_promotion.getSelectedItem().toString(),
+                            date_horaire, jour_horaire, nom_cours, heure_debut,
+                            heure_fin,progressBar).execute();
+                }else
+                {
+                    new AsyncSaveHoraire(code_faculte.getSelectedItem().toString(),
+                            code_promotion.getSelectedItem().toString(),
+                            date_horaire, jour_horaire, nom_cours, heure_debut,
+                            heure_fin,progressBar).execute();
+                }
             }
         });
 
@@ -289,6 +335,9 @@ public class PublierHoraireActivity extends AppCompatActivity {
             horaireResponse.setDateHoraire(editTextDateHoraire.getText().toString());
             horaireResponse.setJourHoraire(editTextJourHoraire.getText().toString().toUpperCase());
             horaireResponse.setCodeCours(editTextNomCours.getText().toString());
+            horaireResponse.setHeureDebut(editTextHeureDebut.getText().toString());
+            horaireResponse.setHeureFin(editTextHeureFin.getText().toString());
+            horaireResponse.setEtatHoraire(0);
             horaireRepository.horaireConnexion().SaveHoraire(horaireResponse).enqueue(new Callback<Reponse>()
             {
                 @Override
@@ -311,6 +360,118 @@ public class PublierHoraireActivity extends AppCompatActivity {
                             Toast.makeText(PublierHoraireActivity.this, "Echec"+message, Toast.LENGTH_SHORT).show();
                         }
 
+                    }
+                    else
+                    {
+                        switch (response.code())
+                        {
+                            case 404:
+                                Toast.makeText(PublierHoraireActivity.this, "Serveur introuvable", Toast.LENGTH_LONG).show();
+                                Log.e("Facule",""+response);
+                                break;
+                            case 500:
+                                Toast.makeText(PublierHoraireActivity.this, "Serveur en pane",Toast.LENGTH_LONG).show();
+                                Log.e("Faculte",""+response);
+                                break;
+                            default:
+                                Toast.makeText(PublierHoraireActivity.this, "Erreur inconnu", Toast.LENGTH_LONG).show();
+                                Log.e("Faculte",""+response);
+                                break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Reponse> call, Throwable t) {
+                    Toast.makeText(PublierHoraireActivity.this, "Probleme de connection", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            return null;
+        }
+    }
+
+    public class AsyncUpdateHoraire extends AsyncTask<Void, Void, Void>
+    {
+        String codeFaculte, codePromotion;
+        EditText editTextDateHoraire, editTextJourHoraire,
+                editTextNomCours, editTextHeureDebut, editTextHeureFin;
+        ProgressBar saveProgress;
+        AlertDialog dialog;
+
+        public AsyncUpdateHoraire(String codeFaculte, String codePromotion,
+                                EditText editTextDateHoraire,
+                                EditText editTextJourHoraire,
+                                EditText editTextNomCours,
+                                EditText editTextHeureDebut,
+                                EditText editTextHeureFin,
+                                ProgressBar saveProgress
+        ) {
+            this.codeFaculte = codeFaculte;
+            this.codePromotion = codePromotion;
+            this.editTextDateHoraire = editTextDateHoraire;
+            this.editTextJourHoraire = editTextJourHoraire;
+            this.editTextNomCours = editTextNomCours;
+            this.editTextHeureDebut = editTextHeureDebut;
+            this.editTextHeureFin = editTextHeureFin;
+            this.saveProgress = saveProgress;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            saveProgress.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+
+            saveProgress.setVisibility(View.GONE);
+            editTextJourHoraire.setText("");
+            editTextNomCours.setText("");
+            heure_debut.setText("");
+            editTextHeureFin.setText("");
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            HoraireRepository horaireRepository = HoraireRepository.getInstance();
+            HoraireResponse horaireResponse = new HoraireResponse();
+
+            horaireResponse.setCodeFaculte(codeFaculte);
+            horaireResponse.setCodePromotion(codePromotion);
+            horaireResponse.setDateHoraire(editTextDateHoraire.getText().toString());
+            horaireResponse.setJourHoraire(editTextJourHoraire.getText().toString().toUpperCase());
+            horaireResponse.setCodeCours(editTextNomCours.getText().toString());
+            horaireResponse.setHeureDebut(editTextHeureDebut.getText().toString());
+            horaireResponse.setHeureFin(editTextHeureFin.getText().toString());
+            horaireResponse.setIdHoraire(myObject.getIdHoraire());
+            horaireRepository.horaireConnexion().UpdadeHoraire(horaireResponse).enqueue(new Callback<Reponse>()
+            {
+                @Override
+                public void onResponse(Call<Reponse> call, Response<Reponse> response) {
+                    if (response.isSuccessful())
+                    {
+                        Log.e("Faculte",""+response.body().getMessage());
+
+
+                        Reponse saveee = response.body();
+
+                        boolean success = saveee.isSuccess();
+                        String message = saveee.getMessage();
+
+                        Log.e("OPERATION",response.body().toString());
+                        if(success){
+                            Toast.makeText(PublierHoraireActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            Toast.makeText(PublierHoraireActivity.this, "Echec"+message, Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else
                     {

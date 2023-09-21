@@ -40,11 +40,18 @@
                     android:paddingLeft="5dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="8dp"/>
+                <TextView
+                    android:id="@+id/modelIUtilisateurItemOptionMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.8"
+                    android:text="&#8942;"
+                    android:textAppearance="?android:textAppearanceLarge"/>
 
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/model_article_linear_selectionner"
+                android:id="@+id/model_user_linear_selectionner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

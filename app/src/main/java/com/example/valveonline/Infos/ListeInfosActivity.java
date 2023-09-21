@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.valveonline.Faculte.data.FaculteReponse;
 import com.example.valveonline.Infos.data.InfosAdapter;
@@ -27,6 +28,7 @@ public class ListeInfosActivity extends AppCompatActivity {
     InfosAdapter infosAdapter;
     RecyclerView recyclerViewListeInfos;
     ProgressBar progressBar;
+    boolean visitor_mode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +36,20 @@ public class ListeInfosActivity extends AppCompatActivity {
 
         this.getSupportActionBar().setTitle("Infos à la une");
 
-        infosRepository = InfosRepository.getInstance();
-        infosAdapter = new InfosAdapter(this);
+        visitor_mode = getIntent().getBooleanExtra("visitor_mode",false);
+
 
         recyclerViewListeInfos = findViewById(R.id.infos_recycle);
         progressBar = findViewById(R.id.infos_progress);
 
         recyclerViewListeInfos.setHasFixedSize(true);
         recyclerViewListeInfos.setLayoutManager(new LinearLayoutManager(this));
+
+
+        infosRepository = InfosRepository.getInstance();
+        infosAdapter = new InfosAdapter(this, visitor_mode);
+
+        //Toast.makeText(this, ""+visitor_mode, Toast.LENGTH_SHORT).show();
 
 
         LoadListeInfos(progressBar);
@@ -66,7 +74,8 @@ public class ListeInfosActivity extends AppCompatActivity {
                                 new InfosResponse (
                                         response.body().get(a).getTitreInfos(),
                                         response.body().get(a).getDateInfos(),
-                                        response.body().get(a).getDesciptionInfos()
+                                        response.body().get(a).getDesciptionInfos(),
+                                        response.body().get(a).getIdInfos()
                                 );
 
 

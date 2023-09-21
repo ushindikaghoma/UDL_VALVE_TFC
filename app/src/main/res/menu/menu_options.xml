@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Modifier"
+        android:id="@+id/action_item_modifer"
+        android:icon="@drawable/baseline_edit_24"/>
+
+    <item android:title="Supprimer"
+        android:id="@+id/action_item_supprimer"
+        android:icon="@drawable/baseline_delete_24"/>
+    <item android:title="Cloturer"
+        android:id="@+id/action_item_cloturer"
+        android:icon="@drawable/baseline_close_24"/>
+</menu>

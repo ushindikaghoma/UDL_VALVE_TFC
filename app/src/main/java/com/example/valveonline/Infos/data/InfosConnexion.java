@@ -18,4 +18,12 @@ public interface InfosConnexion {
     Call<List<InfosResponse>> getListeInfos();
     @POST("api/Infos/SaveInfos")
     Call<Reponse> SaveInfos(@Body InfosResponse infosResponse);
+
+    @POST("api/Infos/UpdateInfos")
+    Call<Reponse> UpdadeInfos(@Body InfosResponse infosResponse);
+
+    @POST("api/Infos/ArchiverInfos")
+    Call<Reponse> ArchiverInfos(@Body InfosResponse infosResponse);
+    @POST("api/Infos/SupprimerInfos")
+    Call<Reponse> SupprimerInfos(@Body InfosResponse infosResponse);
 }

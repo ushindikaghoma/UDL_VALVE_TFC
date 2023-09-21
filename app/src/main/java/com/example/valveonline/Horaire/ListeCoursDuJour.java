@@ -88,7 +88,12 @@ public class ListeCoursDuJour extends AppCompatActivity {
                                         response.body().get(a).getCodeFaculte(),
                                         response.body().get(a).getCodePromotion(),
                                         response.body().get(a).getDesignationCours(),
-                                        response.body().get(a).getCodeCours()
+                                        response.body().get(a).getCodeCours(),
+                                        response.body().get(a).getHeureDebut(),
+                                        response.body().get(a).getHeureFin(),
+                                        response.body().get(a).getDateHoraire(),
+                                        response.body().get(a).getJourHoraire(),
+                                        response.body().get(a).getIdHoraire()
                                 );
 
 
