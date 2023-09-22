@@ -1,5 +1,6 @@
 package com.example.valveonline.Infos.data;
 
+import com.example.valveonline.DataBaseConnector.ApisUrl;
 import com.example.valveonline.DataBaseConnector.adresseServeur;
 import com.example.valveonline.Horaire.data.HoraireConnexion;
 import com.example.valveonline.Horaire.data.HoraireRepository;
@@ -28,7 +29,7 @@ public class InfosRepository {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(adresseServeur.getAdresseIP())
+                .baseUrl(ApisUrl.URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

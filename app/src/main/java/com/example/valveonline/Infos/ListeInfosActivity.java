@@ -38,6 +38,8 @@ public class ListeInfosActivity extends AppCompatActivity {
 
         visitor_mode = getIntent().getBooleanExtra("visitor_mode",false);
 
+        infosRepository = InfosRepository.getInstance();
+        infosAdapter = new InfosAdapter(this, visitor_mode);
 
         recyclerViewListeInfos = findViewById(R.id.infos_recycle);
         progressBar = findViewById(R.id.infos_progress);
@@ -46,8 +48,7 @@ public class ListeInfosActivity extends AppCompatActivity {
         recyclerViewListeInfos.setLayoutManager(new LinearLayoutManager(this));
 
 
-        infosRepository = InfosRepository.getInstance();
-        infosAdapter = new InfosAdapter(this, visitor_mode);
+
 
         //Toast.makeText(this, ""+visitor_mode, Toast.LENGTH_SHORT).show();
 
