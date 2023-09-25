@@ -2,13 +2,17 @@ package com.example.valveonline.Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -22,6 +26,7 @@ import com.example.valveonline.Horaire.JourSemaine;
 import com.example.valveonline.Horaire.PublierHoraireActivity;
 import com.example.valveonline.Infos.ListeInfosActivity;
 import com.example.valveonline.Infos.PublierInfosActivity;
+import com.example.valveonline.Login.LoginActivity;
 import com.example.valveonline.Promotion.NouvellePromotionActivity;
 import com.example.valveonline.R;
 import com.example.valveonline.Utilisateur.NouvelUtilisateurActivity;
@@ -79,7 +84,6 @@ public class HomeActivity extends AppCompatActivity {
 
         item = findViewById(R.id.action_publier_horaire);
 
-
         cardViewHoraire = findViewById(R.id.card_horaire);
         cardViewInfos = findViewById(R.id.card_infos);
 
@@ -131,8 +135,40 @@ public class HomeActivity extends AppCompatActivity {
                 {
                     startActivity(new Intent(getApplicationContext(), PublierInfosActivity.class)
                             .putExtra("type",""));
-                }
+                }else if (id == R.id.action_deconnexion)
 
+                {
+                    AlertDialog alertDialogConfirm = new AlertDialog.Builder(HomeActivity.this).create();
+                    alertDialogConfirm.setTitle("Confirmation");
+                    alertDialogConfirm.setMessage("Voulez-vous vraiment vous deconnecter ?");
+                    alertDialogConfirm.setCancelable(false);
+                    alertDialogConfirm.setButton(DialogInterface.BUTTON_NEGATIVE, "Annuler", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            alertDialogConfirm.dismiss();
+                        }
+                    });
+
+                    alertDialogConfirm.setButton(DialogInterface.BUTTON_POSITIVE, "Confirmer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            alertDialogConfirm.dismiss();
+//                            new HomeActivity().finish();
+//
+//                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+
+                            PackageManager packageManager = getPackageManager();
+                            Intent intent = packageManager.getLaunchIntentForPackage(getPackageName());
+                            ComponentName componentName = intent.getComponent();
+                            Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                            startActivity(mainIntent);
+                            Runtime.getRuntime().exit(0);
+
+                        }
+                    });
+
+                    alertDialogConfirm.show();
+                }
                 return false;
             }
         });

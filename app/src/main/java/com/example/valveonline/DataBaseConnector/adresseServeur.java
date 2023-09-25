@@ -27,7 +27,7 @@ public class adresseServeur {
         adresseIP ="http://192.168.126.162:8081";
         adresseIP ="http://192.168.1.108:8081/taxeWebApi";
 //        adresseIP ="http://afrisofttech-001-site44.btempurl.com";
-        adresseIP ="http://192.168.1.32/UldApis/";
+        adresseIP ="http://192.168.1.31/UldApis/";
     }
 
     public static String getAdresseIP() {

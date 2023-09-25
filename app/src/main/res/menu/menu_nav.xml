@@ -14,7 +14,8 @@
         <menu>
             <item
                 android:id="@+id/action_etudiant"
-                android:title="Liste des éudiants"/>
+                android:title="Liste des éudiants"
+                android:visible="false"/>
 
             <item android:title="Publier une infos"
                 android:id="@+id/action_publier_infos"/>
@@ -25,7 +26,8 @@
             <item android:title="Liste utilisateurs"
                 android:id="@+id/action_liste_utilisateur"/>
             <item android:title="Liste cours"
-                android:id="@+id/action_liste_cours"/>
+                android:id="@+id/action_liste_cours"
+                android:visible="false"/>
             <item android:title="Liste facultés"
                 android:id="@+id/action_liste_faculte"/>
             <item android:title="Liste promotions"
