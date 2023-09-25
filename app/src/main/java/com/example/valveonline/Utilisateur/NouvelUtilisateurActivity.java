@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,6 +51,8 @@ public class NouvelUtilisateurActivity extends AppCompatActivity {
     UtilisateurAdapter utilisateurAdapter;
     RecyclerView recyclerViewListeUtilisateur;
     Button nouvel_utilisateur_btn;
+    public static List<UtilisateurResponse> list_local;
+    SearchView rechercheUtilisateurSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +172,7 @@ public class NouvelUtilisateurActivity extends AppCompatActivity {
                 {
                     progressBarLoadArticle.setVisibility(View.GONE);
 
-                    List<UtilisateurResponse> list_local = new ArrayList<>();
+                    list_local = new ArrayList<>();
                     for (int a = 0; a < response.body().size(); a++)
                     {
                         UtilisateurResponse liste_article =
@@ -184,7 +189,8 @@ public class NouvelUtilisateurActivity extends AppCompatActivity {
 
                         list_local.add(liste_article);
                     }
-                    utilisateurAdapter.setList(list_local);
+                    //utilisateurAdapter.setList(list_local);
+                    utilisateurAdapter = new UtilisateurAdapter(NouvelUtilisateurActivity.this, list_local);
                     recyclerViewListeUtilisateur.setAdapter(utilisateurAdapter);
 
                 }
@@ -379,5 +385,31 @@ public class NouvelUtilisateurActivity extends AppCompatActivity {
 
             return null;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recherche_utilisateur, menu);
+        MenuItem searchMenuItem = menu.findItem(R.id.rechercherUtilisateur);
+        rechercheUtilisateurSearchView = (SearchView) searchMenuItem.getActionView();
+
+        rechercheUtilisateurSearchView.setQueryHint("Rechercher...");
+
+        rechercheUtilisateurSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String search = s;
+                utilisateurAdapter.filter(search);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                String search = s;
+                utilisateurAdapter.filter(search);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

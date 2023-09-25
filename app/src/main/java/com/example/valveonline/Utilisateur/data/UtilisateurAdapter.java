@@ -30,6 +30,9 @@ import com.example.valveonline.DataBaseConnector.Reponse;
 import com.example.valveonline.Faculte.data.FaculteAdapter;
 import com.example.valveonline.Faculte.data.FaculteReponse;
 import com.example.valveonline.Faculte.data.FaculteRepository;
+import com.example.valveonline.Horaire.ListeHoraireTousActivity;
+import com.example.valveonline.Horaire.data.HoraireRepository;
+import com.example.valveonline.Horaire.data.HoraireResponse;
 import com.example.valveonline.Infos.PublierInfosActivity;
 import com.example.valveonline.Infos.data.InfosResponse;
 import com.example.valveonline.Promotion.data.PromotionRepository;
@@ -39,6 +42,7 @@ import com.example.valveonline.Utilisateur.NouvelUtilisateurActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +52,8 @@ public class UtilisateurAdapter extends RecyclerView.Adapter<UtilisateurAdapter.
 
     Context context;
     List<UtilisateurResponse> list;
+    List<UtilisateurResponse> listResult;
+
 
     String pref_nom_utilisateur, pref_niveau_utilisateur,
             pref_fonction_utilisateur, pref_designation_utilisateur,
@@ -76,6 +82,27 @@ public class UtilisateurAdapter extends RecyclerView.Adapter<UtilisateurAdapter.
         pref_niveau_utilisateur = preferences.getString("pref_niveau_user","");
         pref_code_faculte = preferences.getString("pref_code_faculte","");
         pref_code_promotion = preferences.getString("pref_code_promotion","");
+    }
+
+    public UtilisateurAdapter(Context context, List<UtilisateurResponse> list) {
+        this.context = context;
+        this.list = list;
+
+        this.listResult = new ArrayList<>();
+        this.listResult.addAll(NouvelUtilisateurActivity.list_local);
+
+        faculteRepository = FaculteRepository.getInstance();
+        promotionRepository = PromotionRepository.getInstance();
+        utilisateurRepository = UtilisateurRepository.getInstance();
+
+        preferences = context.getSharedPreferences("maPreference", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        pref_nom_utilisateur = preferences.getString("pref_nom_user","");
+        pref_niveau_utilisateur = preferences.getString("pref_niveau_user","");
+        pref_code_faculte = preferences.getString("pref_code_faculte","");
+        pref_code_promotion = preferences.getString("pref_code_promotion","");
+
     }
 
     @NonNull
@@ -477,5 +504,25 @@ public class UtilisateurAdapter extends RecyclerView.Adapter<UtilisateurAdapter.
                 //progressBarLoadPrix.setVisibility(View.GONE);
             }
         });
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        this.list.clear();
+        if (charText.length() == 0) {
+            this.list.addAll(listResult);
+        } else {
+            for (UtilisateurResponse wp : listResult) {
+                if ((wp.getNomUtilisateur()).toLowerCase(Locale.getDefault()).contains(charText)){
+                    this.list.add(wp);
+                }
+
+//                if (wp.getCodeFaculte().toLowerCase(Locale.getDefault()).contains(charText)){
+//                    this.list.add(wp);
+//                }
+
+            }
+        }
+        notifyDataSetChanged();
     }
 }
